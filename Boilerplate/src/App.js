@@ -24,7 +24,6 @@ class App extends React.Component{
       )
     }, 1000)
     
-    return () => clearInterval({setIntervalId})
   }
 
   
