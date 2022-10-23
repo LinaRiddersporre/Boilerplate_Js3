@@ -24,6 +24,7 @@ class App extends React.Component{
       )
     }, 1000)
     
+    return () => clearInterval({setIntervalId})
   }
 
   
@@ -65,7 +66,7 @@ class App extends React.Component{
         <button onClick={this.startcount}>Start</button>
         <div>
           {this.state.paus && <Hide />}
-          <button onClick={this.pausCounting}>Paus</button>
+          <button onClick={this.pausCounting} >Paus</button>
         </div>
         <button onClick={this.resetTimer}>Reset</button>
       </div>

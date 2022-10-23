@@ -4,7 +4,8 @@ export default class Hide extends React.Component{
 
     componentWillUnmount(){
         console.log('unmount')
-        clearInterval({setIntervalId})
+        this.props.
+        clearInterval({})
     }
     render(){
         return(
