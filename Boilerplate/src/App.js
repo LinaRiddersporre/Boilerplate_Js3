@@ -11,17 +11,19 @@ const App = () => {
     setIntervalMethod ( 
       setInterval(() => {
         setSeconds (seconds = seconds + 1)
-        if(seconds === 60){
+        if(seconds === 59){
+          setSeconds(seconds = 0)
           setMinutes(minutes = minutes + 1)
-          setSeconds(0)
-            if(minutes === 59 && seconds === 59){
-            setMinutes(0)
-            setHours(hours = hours + 1)
-          }
+          console.log(minutes)
         }
-        
+        if(minutes === 59){
+            console.log('hej')
+            setMinutes(minutes = 0)
+            setHours(hours => hours +1)
+          }
       }, 1000))
   }
+
 
   const pausCounting = () => {
     clearInterval(interval)
