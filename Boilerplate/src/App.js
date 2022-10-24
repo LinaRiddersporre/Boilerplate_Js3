@@ -1,77 +1,52 @@
-import React from "react";
-import Hide from "./components/hide/hide";
+import {useState} from "react"
+import StopWatch from "./components/stopWatch/stopWatch";
 
+const App = () => {
+  let [seconds, setSeconds] = useState(0);
+  let [minutes, setMinutes] = useState(0);
+  let [hours, setHours] = useState(0);
+  const [interval, setIntervalMethod] = useState(null);
 
-
-class App extends React.Component{
-  constructor(props){
-    super(props);
-      this.state = {
-        hour: 0,
-        minutes: 0,
-        seconds: 0,
-        paus: true,
-      }
-    }
-
-  startcount =() => {
-    const setIntervalId = setInterval(() => {console.log(this.state.paus)
-      this.count()
-      this.setState(
-        
-          {seconds: this.state.seconds + 1}
-          
-      )
-    }, 1000)
-    
-    return () => clearInterval({setIntervalId})
-  }
-
-  
-  pausCounting = () => {
-    this.setState({paus: !this.state.paus})
-    
-    }
-    
-  count = () => {
-    if(this.state.seconds >= 59){
-      this.setState({seconds: this.state.seconds = 0, minutes: this.state.minutes +1})
-      if(this.state.minutes >= 59){
-        this.setState({seconds: this.state.seconds = 0, minutes: this.state.minutes = 0, hour: this.state.hour + 1})
-        if(this.state.hour >= 23){
-          this.setState({seconds: this.state.seconds = 0, minutes: this.state.minutes = 0, hour: this.state.hour = 0})
+  const startCount = () => {
+    setIntervalMethod ( 
+      setInterval(() => {
+        setSeconds (seconds = seconds + 1)
+        if(seconds === 60){
+          setMinutes(minutes = minutes + 1)
+          setSeconds(0)
+            if(minutes === 59 && seconds === 59){
+            setMinutes(0)
+            setHours(hours = hours + 1)
+          }
         }
-      }
-    }
-  }
- 
-  resetTimer = () => {
-    this.setState(
-      {hour: 0, minutes: 0, seconds: 0, paus: true}
-    )
-  }
-
-  componentDidMount(){
-    localStorage.setItem('myState', JSON.stringify(this.state))
-  }
-  componentWillUnmount(){
-    localStorage.removeItem('myState')
-  }
-
-  render(){
-    return(
-      <div className="divBody">
         
-        <h1>{this.state.hour}:{this.state.minutes}:{this.state.seconds}</h1>
-        <button onClick={this.startcount}>Start</button>
-        <div>
-          {this.state.paus && <Hide />}
-          <button onClick={this.pausCounting} >Paus</button>
-        </div>
-        <button onClick={this.resetTimer}>Reset</button>
-      </div>
-    )
+      }, 1000))
   }
+
+  const pausCounting = () => {
+    clearInterval(interval)
+    }
+ 
+  const resetTimer = () => {
+    setSeconds(0)
+    setMinutes(0)
+    setHours(0)
+    clearInterval(interval)
+  }
+
+  return(
+    <div className="divBody">
+      <StopWatch
+        start = {startCount}
+        pause = {pausCounting}
+        reset = {resetTimer}
+        seconds = {seconds}
+        minutes = {minutes}
+        hours = {hours}
+      />
+    </div>
+  )
+
 }
 
 export default App;
