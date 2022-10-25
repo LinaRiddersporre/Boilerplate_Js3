@@ -11,6 +11,7 @@ const App = () => {
     setIntervalMethod ( 
       setInterval(() => {
         setSeconds (seconds = seconds + 1)
+        console.log(seconds)
         if(seconds === 59){
           setSeconds(seconds = 0)
           setMinutes(minutes = minutes + 1)
