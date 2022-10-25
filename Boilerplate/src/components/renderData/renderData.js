@@ -1,15 +1,15 @@
+import ListElement from "../listElement/listElement";
+
 const RenderData = (props) => {
     return(
         <ul>
             {props.list.map((value, index) => {
                 return(
-                    <li key={index}>
-                        <p>{value.firstName + ' ' + value.lastName + ' ' + value.age}</p>
-                    </li>
+                    <ListElement key = {index} value = {value}/>
                 )
             })}
         </ul>
     )
 }
 
-export default RenderData
+export default RenderData;
